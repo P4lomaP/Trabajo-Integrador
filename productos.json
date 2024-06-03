@@ -1,0 +1,22 @@
+[
+    {
+        "nombre": "pan lactal",
+        "precio": 1600.0,
+        "stock": 18
+    },
+    {
+        "nombre": "facturas",
+        "precio": 600.0,
+        "stock": 38
+    },
+    {
+        "nombre": "coca cola chica",
+        "precio": 900.0,
+        "stock": 12
+    },
+    {
+        "nombre": "coca cola mediana",
+        "precio": 1300.0,
+        "stock": 10
+    }
+]
