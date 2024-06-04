@@ -1,12 +1,12 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import fondos
 import json_productos
 import subprocess
 
 def ventas(productos, nombre_usuario, master):
     def vender_producto():
-        selected_index = listbox_productos.curselection()
+        selected_index = treeview_productos.selection()
         if selected_index:
             producto = productos[selected_index[0]]
             cantidad_vendida = entry_cantidad.get()
@@ -28,10 +28,10 @@ def ventas(productos, nombre_usuario, master):
             messagebox.showerror("Error", "Por favor selecciona un producto.")
 
     def actualizar_lista_productos():
-        listbox_productos.delete(0, tk.END)
-        for producto in productos:
-            info_producto = f"{producto['nombre']} - Precio: {producto['precio']} - Stock: {producto['stock']}"
-            listbox_productos.insert(tk.END, info_producto)
+        for item in treeview_productos.get_children():
+            treeview_productos.delete(item)
+        for i, producto in enumerate(productos):
+            treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock']))
     
     ventas_window = tk.Toplevel(master)
     ventas_window.title("Ventas")
@@ -49,8 +49,12 @@ def ventas(productos, nombre_usuario, master):
     label_productos = tk.Label(ventas_frame, text="Productos Disponibles:", font=("Times new roman", 14, "bold"), bg="#FED89B")
     label_productos.grid(row=0, column=0, sticky="w")
 
-    listbox_productos = tk.Listbox(ventas_frame, width=50, height=10, font=("Times new roman", 12))
-    listbox_productos.grid(row=1, column=0, padx=10, pady=10)
+    treeview_productos = ttk.Treeview(ventas_frame, columns=("nombre", "precio", "stock"), show="headings", height=20)
+    treeview_productos.heading("nombre", text="Nombre")
+    treeview_productos.heading("precio", text="Precio")
+    treeview_productos.heading("stock", text="Stock")
+    treeview_productos.grid(row=1, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
+    treeview_productos.tag_configure('treeview', font=("Times new roman", 14))
 
     label_cantidad = tk.Label(ventas_frame, text="Cantidad:", font=("Times new roman", 14, "bold"), bg="#FED89B")
     label_cantidad.grid(row=2, column=0, sticky="w")
