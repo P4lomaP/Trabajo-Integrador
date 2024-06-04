@@ -33,6 +33,15 @@ def ventas(productos, nombre_usuario, master):
         for i, producto in enumerate(productos):
             treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock']))
     
+    def filtrar_productos(event):
+        filtro = search_var.get().lower()
+        for item in treeview_productos.get_children():
+            treeview_productos.delete(item)
+        for i, producto in enumerate(productos):
+            if filtro in producto['nombre'].lower():
+                treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock']))
+
+    
     ventas_window = tk.Toplevel(master)
     ventas_window.title("Ventas")
     ventas_window.state('normal')
@@ -48,6 +57,14 @@ def ventas(productos, nombre_usuario, master):
 
     label_productos = tk.Label(ventas_frame, text="Productos Disponibles:", font=("Times new roman", 14, "bold"), bg="#FED89B")
     label_productos.grid(row=0, column=0, sticky="w")
+
+    search_label = tk.Label(ventas_frame, text="Buscar Producto:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    search_label.grid(row=0, column=1, sticky="e")
+
+    search_var = tk.StringVar()
+    search_bar = tk.Entry(ventas_frame, textvariable=search_var, font=("Times new roman", 14))
+    search_bar.grid(row=0, column=2, padx=10, pady=10, sticky="e")
+    search_bar.bind("<KeyRelease>", filtrar_productos)
 
     treeview_productos = ttk.Treeview(ventas_frame, columns=("nombre", "precio", "stock"), show="headings", height=20)
     treeview_productos.heading("nombre", text="Nombre")
