@@ -11,20 +11,31 @@ def gestion_productos(productos, nombre_usuario, root):
         nombre = entry_nombre.get()
         precio = entry_precio.get()
         stock = entry_stock.get()
-        if nombre and precio and stock:
+        unidad = entry_unidad.get()
+        fecha_vencimiento = entry_fecha_vencimiento.get_date()
+
+        if nombre and precio and stock and unidad and fecha_vencimiento:
             try:
                 precio = float(precio)
                 stock = int(stock)
                 if precio > 0 and stock >= 0:
-                    nuevo_producto = {"nombre": nombre, "precio": precio, "stock": stock}
-                    productos.append(nuevo_producto)
-                    json_productos.guardar_productos(productos)
-                    messagebox.showinfo("Éxito", "Producto agregado correctamente.")
-                    actualizar_lista_productos()
+                    if re.match("^[a-zA-Z\s]+$", nombre): 
+                        nombres_existente = [producto['nombre'].lower() for producto in productos]
+                        if nombre.lower() in nombres_existente:
+                            messagebox.showerror("Error", "El nombre del producto ya existe.")
+                        else:
+                            fecha_vencimiento_str = fecha_vencimiento.strftime('%d-%m-%Y')
+                            nuevo_producto = {"nombre": nombre, "precio": precio, "stock": stock, "unidad": unidad, "fecha_vencimiento": fecha_vencimiento_str}
+                            productos.append(nuevo_producto)
+                            json_productos.guardar_productos(productos)
+                            messagebox.showinfo("Éxito", "Producto agregado correctamente.")
+                            actualizar_lista_productos()
+                    else:
+                        messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios.")
                 else:
                     messagebox.showerror("Error", "Precio o stock no válidos.")
             except ValueError:
-                messagebox.showerror("Error", "Precio o stock no válidos.")
+                messagebox.showerror("Error", "Precio o stock no válidos. Deben ser números positivos.")
         else:
             messagebox.showerror("Error", "Por favor complete todos los campos.")
 
@@ -35,43 +46,50 @@ def gestion_productos(productos, nombre_usuario, root):
             listbox_productos.insert(tk.END, info_producto)
 
     def eliminar_producto():
-        selected_index = listbox_productos.curselection()
-        if selected_index:
+        selected_item = treeview_productos.selection()
+        if selected_item:
+            producto_index = treeview_productos.index(selected_item[0])
             confirmacion = messagebox.askyesno("Confirmar eliminación", "¿Estás seguro de que deseas eliminar este producto?")
             if confirmacion:
-                producto_eliminado = productos[selected_index[0]]
-                del productos[selected_index[0]]
+                del productos[producto_index]
                 json_productos.guardar_productos(productos)
-                messagebox.showinfo("Éxito", "Producto eliminado correctamente")
+                messagebox.showinfo("Éxito", "Producto eliminado correctamente.")
                 actualizar_lista_productos()
 
     def modificar_producto():
-        selected_index = listbox_productos.curselection()
-        if selected_index:
-            producto_modificar = productos[selected_index[0]]
+        selected_item = treeview_productos.selection()
+        if selected_item:
+            producto_index = treeview_productos.index(selected_item[0])
+            producto_modificar = productos[producto_index]
             nuevo_nombre = entry_nombre.get()
             nuevo_precio = entry_precio.get()
             nuevo_stock = entry_stock.get()
-            if nuevo_nombre and nuevo_precio and nuevo_stock:
+            nueva_unidad = entry_unidad.get()
+            nueva_fecha_vencimiento = entry_fecha_vencimiento.get_date()
+
+            if nuevo_nombre and nuevo_precio and nuevo_stock and nueva_unidad and nueva_fecha_vencimiento:
                 try:
                     nuevo_precio = float(nuevo_precio)
                     nuevo_stock = int(nuevo_stock)
                     if nuevo_precio > 0 and nuevo_stock > 0:
                         if re.match("^[a-zA-Z\s]+$", nuevo_nombre):
+                            fecha_vencimiento_str = nueva_fecha_vencimiento.strftime('%d-%m-%Y')
                             producto_modificar["nombre"] = nuevo_nombre
                             producto_modificar["precio"] = nuevo_precio
                             producto_modificar["stock"] = nuevo_stock
+                            producto_modificar["unidad"] = nueva_unidad
+                            producto_modificar["fecha_vencimiento"] = fecha_vencimiento_str
                             json_productos.guardar_productos(productos)
-                            messagebox.showinfo("Éxito", "Producto modificado correctamente")
+                            messagebox.showinfo("Éxito", "Producto modificado correctamente.")
                             actualizar_lista_productos()
                         else:
-                            messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios")
+                            messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios.")
                     else:
-                        messagebox.showerror("Error", "El precio y la cantidad deben ser números positivos")
+                        messagebox.showerror("Error", "El precio y la cantidad deben ser números positivos.")
                 except ValueError:
-                    messagebox.showerror("Error", "El precio y la cantidad deben ser números")
+                    messagebox.showerror("Error", "El precio y la cantidad deben ser números.")
             else:
-                messagebox.showerror("Error", "Por favor completa todos los campos")
+                messagebox.showerror("Error", "Por favor completa todos los campos.")
 
     productos = json_productos.cargar_productos()
 
@@ -126,29 +144,35 @@ def gestion_productos(productos, nombre_usuario, root):
     form_frame = tk.Frame(gestion_frame, padx=20, pady=6, bg="#FED89B")
     form_frame.grid(row=2, column=0, columnspan=6, padx=10, pady=(10, 5), sticky="nsew")
 
-    label_nombre = tk.Label(gestion_frame, text="Nombre:", font=("Times new roman", 14), bg="#FED89B")  # Aumentar el tamaño de la fuente
-    label_nombre.grid(row=0, column=0)
-    entry_nombre = tk.Entry(gestion_frame, font=("Times new roman", 14))  # Aumentar el tamaño de la fuente
-    entry_nombre.grid(row=0, column=1)
+    label_nombre = tk.Label(form_frame, text="Nombre:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_nombre.grid(row=0, column=0, sticky="w", padx=10, pady=5)
+    entry_nombre = tk.Entry(form_frame, font=("Times new roman", 14))
+    entry_nombre.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
-    label_precio = tk.Label(gestion_frame, text="Precio:", font=("Times new roman", 14), bg="#FED89B")  # Aumentar el tamaño de la fuente
-    label_precio.grid(row=1, column=0)
-    entry_precio = tk.Entry(gestion_frame, font=("Times new roman", 14))  # Aumentar el tamaño de la fuente
-    entry_precio.grid(row=1, column=1)
+    label_precio = tk.Label(form_frame, text="Precio:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_precio.grid(row=1, column=0, sticky="w", padx=10, pady=5)
+    entry_precio = tk.Entry(form_frame, font=("Times new roman", 14))
+    entry_precio.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
-    label_stock = tk.Label(gestion_frame, text="Stock:", font=("Times new roman", 14), bg="#FED89B")  # Aumentar el tamaño de la fuente
-    label_stock.grid(row=2, column=0)
-    entry_stock = tk.Entry(gestion_frame, font=("Times new roman", 14))  # Aumentar el tamaño de la fuente
-    entry_stock.grid(row=2, column=1)
+    label_stock = tk.Label(form_frame, text="Stock:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_stock.grid(row=2, column=0, sticky="w", padx=10, pady=5)
+    entry_stock = tk.Entry(form_frame, font=("Times new roman", 14))
+    entry_stock.grid(row=2, column=1, padx=10, pady=5, sticky="w")
 
-    btn_agregar = tk.Button(gestion_frame, text="Agregar Producto", command=agregar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")  # Aumentar el tamaño de la fuente
-    btn_agregar.grid(row=3, column=0, columnspan=2, pady=10)
+    label_unidad = tk.Label(form_frame, text="Unidad:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_unidad.grid(row=3, column=0, sticky="w", padx=10, pady=5)
 
-    listbox_productos = tk.Listbox(gestion_frame, width=50, height=10, font=("Times new roman", 12))  # Aumentar el tamaño de la fuente
-    listbox_productos.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
-    
-    label_categoria = tk.Label(gestion_frame, text="Categoría: Gestión", font=("Times new roman", 14), bg="#FED89B")  # Aumentar el tamaño de la fuente
-    label_categoria.grid(row=5, column=0, columnspan=2)
+    unidades = ["Kilogramos", "Gramos", "Litros", "Mililitros", "Paquetes", "Otro"]
+
+    entry_unidad = ttk.Combobox(form_frame, values=unidades, font=("Times new roman", 14), state="readonly")
+    entry_unidad.grid(row=3, column=1, padx=10, pady=5, sticky="w")
+    entry_unidad.current(0)
+
+    label_fecha_vencimiento = tk.Label(form_frame, text="Fecha de Vencimiento:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_fecha_vencimiento.grid(row=4, column=0, sticky="w", padx=10, pady=5)
+
+    entry_fecha_vencimiento = DateEntry(form_frame, font=("Times new roman", 14), cal_bg="yellow", cal_fg="black", background="blue", foreground="white", borderwidth=2, selectbackground="violet", selectforeground="white", showweeknumbers=False, locale='es_ES', date_pattern='dd-mm-yyyy', state='readonly')
+    entry_fecha_vencimiento.grid(row=4, column=1, padx=10, pady=5, sticky="w")
 
     btn_eliminar = tk.Button(gestion_frame, text="Eliminar Producto", command=eliminar_producto,font=("Times new roman", 14),bg="#BE7250", fg="white")  # Aumentar el tamaño de la fuente
     btn_eliminar.grid(row=7, column=0, columnspan=3, pady=10)
