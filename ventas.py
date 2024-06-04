@@ -66,6 +66,10 @@ def ventas(productos, nombre_usuario, master):
     search_bar.grid(row=0, column=2, padx=10, pady=10, sticky="e")
     search_bar.bind("<KeyRelease>", filtrar_productos)
 
+    style = ttk.Style()
+    style.configure("Treeview", font=("Times new roman", 14))
+    style.configure("Treeview.Heading", font=("Times new roman", 14, "bold"))
+
     treeview_productos = ttk.Treeview(ventas_frame, columns=("nombre", "precio", "stock"), show="headings", height=20)
     treeview_productos.heading("nombre", text="Nombre")
     treeview_productos.heading("precio", text="Precio")
