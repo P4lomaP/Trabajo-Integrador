@@ -6,9 +6,10 @@ import subprocess
 
 def ventas(productos, nombre_usuario, master):
     def vender_producto():
-        selected_index = treeview_productos.selection()
-        if selected_index:
-            producto = productos[selected_index[0]]
+        selected_item = treeview_productos.selection()
+        if selected_item:
+            producto_index = treeview_productos.index(selected_item[0])
+            producto = productos[producto_index]
             cantidad_vendida = entry_cantidad.get()
             if cantidad_vendida:
                 try:
@@ -53,7 +54,7 @@ def ventas(productos, nombre_usuario, master):
         subprocess.Popen(["python","main.py"])
 
     ventas_frame = tk.Frame(ventas_window, padx=20, pady=6, bg="#FED89B")
-    ventas_frame.pack(anchor="center", pady=80)
+    ventas_frame.pack(expand=True, fill=tk.BOTH)
 
     ventas_frame.grid_rowconfigure(0, weight=0)
     ventas_frame.grid_rowconfigure(1, weight=1)
@@ -90,13 +91,13 @@ def ventas(productos, nombre_usuario, master):
     entry_cantidad.grid(row=3, column=0, padx=10, pady=10, sticky="w")
 
     btn_vender = tk.Button(ventas_frame, text="Vender Producto", command=vender_producto, font=("Times new roman", 14), bg="#8F4B2C", fg="white")
-    btn_vender.grid(row=4, columnspan=2, pady=20)
+    btn_vender.grid(row=4, columnspan=3, pady=20)
 
     label_usuario = tk.Label(ventas_frame, text=f"Bienvenido, {nombre_usuario} :)", font=("Times new roman", 14, "bold"), bg="#FED89B")
-    label_usuario.grid(row=5, column=0, columnspan=2, pady=10)
+    label_usuario.grid(row=5, column=0, columnspan=3, pady=10)
 
     actualizar_lista_productos()
 
     btn_salir = tk.Button(ventas_frame, text="Salir", command=volver, font=("Times new roman", 14), fg="white", bg="#BE7250")
-    btn_salir.grid(row=6, column=0, columnspan=2, pady=10)
+    btn_salir.grid(row=6, column=0, columnspan=3, pady=10)
 
