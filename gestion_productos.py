@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import fondos
 import json_productos
 import os
@@ -88,13 +88,43 @@ def gestion_productos(productos, nombre_usuario, root):
     fondo_path = "fondoge.png"
     fondos.establecer_imagen_de_fondo(gestion_window, fondo_path)
 
-    gestion_frame = tk.Frame(gestion_window, padx=40, pady=20, bg="#FED89B")  # Aumento del padding para hacer los elementos más grandes
-    gestion_frame.pack()
+    gestion_frame = tk.Frame(gestion_window, padx=20, pady=6, bg="#FED89B")
+    gestion_frame.pack(expand=True, fill=tk.BOTH)
 
-    global entry_nombre
-    global entry_precio
-    global entry_stock
-    global listbox_productos
+    gestion_frame.grid_rowconfigure(0, weight=0)
+    gestion_frame.grid_rowconfigure(1, weight=1)
+    gestion_frame.grid_rowconfigure(2, weight=0)
+    gestion_frame.grid_columnconfigure(0, weight=1)
+    gestion_frame.grid_columnconfigure(1, weight=1)
+
+    label_productos = tk.Label(gestion_frame, text="Gestión de Productos:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_productos.grid(row=0, column=0, columnspan=3, sticky="w", padx=10, pady=(10, 5))
+
+    search_label = tk.Label(gestion_frame, text="Buscar Producto:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    search_label.grid(row=0, column=3, sticky="e", padx=(0, 10), pady=(10, 5))
+
+    search_var = tk.StringVar()
+    search_bar = tk.Entry(gestion_frame, textvariable=search_var, font=("Times new roman", 14))
+    search_bar.grid(row=0, column=4, columnspan=2, padx=10, pady=(10, 5), sticky="ew")
+    search_bar.bind("<KeyRelease>", filtrar_productos)
+
+    treeview_frame = tk.Frame(gestion_frame, bg="#FED89B")
+    treeview_frame.grid(row=1, column=0, columnspan=6, padx=10, pady=(0, 5), sticky="nsew")
+
+    style = ttk.Style()
+    style.configure("Treeview", font=("Times new roman", 14))
+    style.configure("Treeview.Heading", font=("Times new roman", 14, "bold"))
+
+    treeview_productos = ttk.Treeview(treeview_frame, columns=("nombre", "precio", "stock", "unidad", "fecha_vencimiento"), show="headings", height=10)
+    treeview_productos.heading("nombre", text="Nombre")
+    treeview_productos.heading("precio", text="Precio")
+    treeview_productos.heading("stock", text="Stock")
+    treeview_productos.heading("unidad", text="Unidad")
+    treeview_productos.heading("fecha_vencimiento", text="Fecha de Vencimiento")
+    treeview_productos.pack(fill=tk.BOTH, expand=True)
+    
+    form_frame = tk.Frame(gestion_frame, padx=20, pady=6, bg="#FED89B")
+    form_frame.grid(row=2, column=0, columnspan=6, padx=10, pady=(10, 5), sticky="nsew")
 
     label_nombre = tk.Label(gestion_frame, text="Nombre:", font=("Times new roman", 14), bg="#FED89B")  # Aumentar el tamaño de la fuente
     label_nombre.grid(row=0, column=0)
@@ -114,11 +144,9 @@ def gestion_productos(productos, nombre_usuario, root):
     btn_agregar = tk.Button(gestion_frame, text="Agregar Producto", command=agregar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")  # Aumentar el tamaño de la fuente
     btn_agregar.grid(row=3, column=0, columnspan=2, pady=10)
 
-    # ListBox para mostrar los productos existentes
     listbox_productos = tk.Listbox(gestion_frame, width=50, height=10, font=("Times new roman", 12))  # Aumentar el tamaño de la fuente
     listbox_productos.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
-
-    # Label para mostrar la categoría (en este caso, "Gestión")
+    
     label_categoria = tk.Label(gestion_frame, text="Categoría: Gestión", font=("Times new roman", 14), bg="#FED89B")  # Aumentar el tamaño de la fuente
     label_categoria.grid(row=5, column=0, columnspan=2)
 
@@ -130,7 +158,6 @@ def gestion_productos(productos, nombre_usuario, root):
     btn_volver = tk.Button(gestion_frame, text="Volver", command=volver, font=("Times new roman", 14), bg="#BE7250", fg="white")  # Aumentar el tamaño de la fuente
     btn_volver.grid(row=9, column=0, columnspan=3, pady=10)
     
-    # Actualizar la lista de productos
     actualizar_lista_productos()
 
   
