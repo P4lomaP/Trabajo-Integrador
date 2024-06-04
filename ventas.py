@@ -55,6 +55,12 @@ def ventas(productos, nombre_usuario, master):
     ventas_frame = tk.Frame(ventas_window, padx=20, pady=6, bg="#FED89B")
     ventas_frame.pack(anchor="center", pady=80)
 
+    ventas_frame.grid_rowconfigure(0, weight=0)
+    ventas_frame.grid_rowconfigure(1, weight=1)
+    ventas_frame.grid_rowconfigure(2, weight=0)
+    ventas_frame.grid_columnconfigure(0, weight=1)
+    ventas_frame.grid_columnconfigure(1, weight=1)
+
     label_productos = tk.Label(ventas_frame, text="Productos Disponibles:", font=("Times new roman", 14, "bold"), bg="#FED89B")
     label_productos.grid(row=0, column=0, sticky="w")
 
