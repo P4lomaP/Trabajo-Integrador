@@ -32,7 +32,7 @@ def ventas(productos, nombre_usuario, master):
         for item in treeview_productos.get_children():
             treeview_productos.delete(item)
         for i, producto in enumerate(productos):
-            treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock']))
+            treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
     
     def filtrar_productos(event):
         filtro = search_var.get().lower()
@@ -40,9 +40,8 @@ def ventas(productos, nombre_usuario, master):
             treeview_productos.delete(item)
         for i, producto in enumerate(productos):
             if filtro in producto['nombre'].lower():
-                treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock']))
+                treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
 
-    
     ventas_window = tk.Toplevel(master)
     ventas_window.title("Ventas")
     ventas_window.state('normal')
@@ -77,12 +76,13 @@ def ventas(productos, nombre_usuario, master):
     style.configure("Treeview", font=("Times new roman", 14))
     style.configure("Treeview.Heading", font=("Times new roman", 14, "bold"))
 
-    treeview_productos = ttk.Treeview(ventas_frame, columns=("nombre", "precio", "stock"), show="headings", height=20)
+    treeview_productos = ttk.Treeview(ventas_frame, columns=("nombre", "precio", "stock", "unidad", "fecha_vencimiento"), show="headings", height=20)
     treeview_productos.heading("nombre", text="Nombre")
     treeview_productos.heading("precio", text="Precio")
     treeview_productos.heading("stock", text="Stock")
+    treeview_productos.heading("unidad", text="Unidad")
+    treeview_productos.heading("fecha_vencimiento", text="Fecha de Vencimiento")
     treeview_productos.grid(row=1, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
-    treeview_productos.tag_configure('treeview', font=("Times new roman", 14))
 
     label_cantidad = tk.Label(ventas_frame, text="Cantidad:", font=("Times new roman", 14, "bold"), bg="#FED89B")
     label_cantidad.grid(row=2, column=0, sticky="w")
