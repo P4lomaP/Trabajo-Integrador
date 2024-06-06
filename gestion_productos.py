@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
+import subprocess
+import re
+from tkcalendar import DateEntry
 import fondos
 import json_productos
-import os
-import re
-import subprocess
 
 def gestion_productos(productos, nombre_usuario, root):
     def agregar_producto():
@@ -40,11 +40,11 @@ def gestion_productos(productos, nombre_usuario, root):
             messagebox.showerror("Error", "Por favor complete todos los campos.")
 
     def actualizar_lista_productos():
-        listbox_productos.delete(0, tk.END)
-        for producto in productos:
-            info_producto = f"{producto['nombre']} - Precio: {producto['precio']} - Stock: {producto['stock']}"
-            listbox_productos.insert(tk.END, info_producto)
-
+        for item in treeview_productos.get_children():
+            treeview_productos.delete(item)
+        for i, producto in enumerate(productos):
+            treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
+    
     def eliminar_producto():
         selected_item = treeview_productos.selection()
         if selected_item:
@@ -90,7 +90,19 @@ def gestion_productos(productos, nombre_usuario, root):
                     messagebox.showerror("Error", "El precio y la cantidad deben ser números.")
             else:
                 messagebox.showerror("Error", "Por favor completa todos los campos.")
+    
+    def filtrar_productos(event):
+        filtro = search_var.get().lower()
+        for item in treeview_productos.get_children():
+            treeview_productos.delete(item)
+        for i, producto in enumerate(productos):
+            if filtro in producto['nombre'].lower():
+                treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
 
+    def volver():
+        gestion_window.destroy()
+        subprocess.Popen(["python","main.py"])
+    
     productos = json_productos.cargar_productos()
 
     gestion_window = tk.Toplevel(root)
@@ -98,11 +110,6 @@ def gestion_productos(productos, nombre_usuario, root):
     gestion_window.state('normal')
     gestion_window.attributes('-fullscreen', True)
 
-    def volver():
-        gestion_window.destroy()
-        subprocess.Popen(["python","main.py"])
-
-    # Verificar la existencia del archivo antes de establecer la imagen de fondo
     fondo_path = "fondoge.png"
     fondos.establecer_imagen_de_fondo(gestion_window, fondo_path)
 
@@ -174,12 +181,12 @@ def gestion_productos(productos, nombre_usuario, root):
     entry_fecha_vencimiento = DateEntry(form_frame, font=("Times new roman", 14), cal_bg="yellow", cal_fg="black", background="blue", foreground="white", borderwidth=2, selectbackground="violet", selectforeground="white", showweeknumbers=False, locale='es_ES', date_pattern='dd-mm-yyyy', state='readonly')
     entry_fecha_vencimiento.grid(row=4, column=1, padx=10, pady=5, sticky="w")
 
-    btn_eliminar = tk.Button(gestion_frame, text="Eliminar Producto", command=eliminar_producto,font=("Times new roman", 14),bg="#BE7250", fg="white")  # Aumentar el tamaño de la fuente
+    btn_eliminar = tk.Button(gestion_frame, text="Eliminar Producto", command=eliminar_producto,font=("Times new roman", 14),bg="#BE7250", fg="white")  
     btn_eliminar.grid(row=7, column=0, columnspan=3, pady=10)
-    btn_modificar = tk.Button(gestion_frame, text="Modificar Producto", command=modificar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")  # Aumentar el tamaño de la fuente
+    btn_modificar = tk.Button(gestion_frame, text="Modificar Producto", command=modificar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")  
     btn_modificar.grid(row=8, column=0, columnspan=3, pady=10)
 
-    btn_volver = tk.Button(gestion_frame, text="Volver", command=volver, font=("Times new roman", 14), bg="#BE7250", fg="white")  # Aumentar el tamaño de la fuente
+    btn_volver = tk.Button(gestion_frame, text="Volver", command=volver, font=("Times new roman", 14), bg="#BE7250", fg="white")  
     btn_volver.grid(row=9, column=0, columnspan=3, pady=10)
     
     actualizar_lista_productos()
