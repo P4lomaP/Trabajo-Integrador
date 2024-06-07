@@ -173,7 +173,7 @@ def ventas(productos, nombre_usuario, master):
     btn_vender = tk.Button(entry_frame, text="Añadir al Carrito", command=vender_producto, font=("Times new roman", 14), bg="#8F4B2C", fg="white")
     btn_vender.grid(row=0, column=2, padx=10, pady=10, sticky="w")
 
-    btn_salir = tk.Button(entry_frame, text="Salir", command=volver, font=("Times new roman", 14), fg="white", bg="#BE7250")
+    btn_salir = tk.Button(entry_frame, text="Volver", command=volver, font=("Times new roman", 14), fg="white", bg="#BE7250")
     btn_salir.grid(row=0, column=4, padx=10, pady=10, sticky="e")
 
     actualizar_lista_productos()

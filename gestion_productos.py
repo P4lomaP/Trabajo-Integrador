@@ -39,7 +39,6 @@ def gestion_productos(productos, nombre_usuario, root):
         else:
             messagebox.showerror("Error", "Por favor complete todos los campos.")
 
-
     def actualizar_lista_productos():
         for item in treeview_productos.get_children():
             treeview_productos.delete(item)
@@ -140,6 +139,11 @@ def gestion_productos(productos, nombre_usuario, root):
     style = ttk.Style()
     style.configure("Treeview", font=("Times new roman", 14))
     style.configure("Treeview.Heading", font=("Times new roman", 14, "bold"))
+
+    vsb = ttk.Scrollbar(treeview_frame, orient="vertical")
+    vsb.pack(side='right', fill='y')
+    hsb = ttk.Scrollbar(treeview_frame, orient="horizontal")
+    hsb.pack(side='bottom', fill='x')
 
     treeview_productos = ttk.Treeview(treeview_frame, columns=("nombre", "precio", "stock", "unidad", "fecha_vencimiento"), show="headings", height=10)
     treeview_productos.heading("nombre", text="Nombre")

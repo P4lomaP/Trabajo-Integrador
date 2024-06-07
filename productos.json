@@ -64,9 +64,9 @@
     },
     {
         "nombre": "papas",
-        "precio": 200.0,
-        "stock": 18,
+        "precio": 400.0,
+        "stock": 30,
         "unidad": "Kilogramos",
-        "fecha_vencimiento": "04-06-2024"
+        "fecha_vencimiento": "07-06-2024"
     }
 ]
