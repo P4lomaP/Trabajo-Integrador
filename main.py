@@ -1,11 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
 import re
-import json_usuarios
-import json_productos
+import lista_empleados
+import lista_productos
 import gestion_productos
 import fondos
-import ventas
+import gestion_ventas
 import subprocess
 
 def volver_gestion():
@@ -23,7 +23,7 @@ def iniciar_sesion():
     if nombre_usuario and contraseña:
         categoria = seleccion_categoria.get()
         if categoria:
-            usuarios = json_usuarios.cargar_usuarios()
+            usuarios = lista_empleados.cargar_usuarios()
             usuario_encontrado = False
             for usuario in usuarios:
                 if usuario["usuario"] == nombre_usuario:
@@ -34,10 +34,10 @@ def iniciar_sesion():
                     if usuario.get("contrasena") == contraseña:
                         root.withdraw()
                         if categoria == "Ventas":
-                            productos = json_productos.cargar_productos()
-                            ventas.ventas(productos, nombre_usuario, root)
+                            productos = lista_productos.cargar_productos()
+                            gestion_ventas.ventas(productos, nombre_usuario, root)
                         else:
-                            productos = json_productos.cargar_productos()
+                            productos = lista_productos.cargar_productos()
                             gestion_productos.gestion_productos(productos, nombre_usuario, root)
                         return
             if not usuario_encontrado and guardar_usuario_var.get():
@@ -45,10 +45,10 @@ def iniciar_sesion():
                 messagebox.showinfo("Éxito", "Usuario guardado correctamente.")
                 root.withdraw()
                 if categoria == "Ventas":
-                    productos = json_productos.cargar_productos()
-                    ventas.ventas(productos, nombre_usuario, root)
+                    productos = lista_productos.cargar_productos()
+                    gestion_ventas.ventas(productos, nombre_usuario, root)
                 else:
-                    productos = json_productos.cargar_productos()
+                    productos = lista_productos.cargar_productos()
                     gestion_productos.gestion_productos(productos, nombre_usuario, root)
                 return
             elif not usuario_encontrado:
@@ -61,7 +61,7 @@ def iniciar_sesion():
         messagebox.showerror("Error", "Por favor ingresa tu nombre de usuario y contraseña.")
 
 def verificar_usuario(usuario, categoria, contraseña):
-    usuarios = json_usuarios.cargar_usuarios()
+    usuarios = lista_empleados.cargar_usuarios()
     usuario_existente = False
 
     for u in usuarios:
@@ -71,7 +71,7 @@ def verificar_usuario(usuario, categoria, contraseña):
 
     if not usuario_existente:
         usuarios.append({"usuario": usuario, "categoria": categoria, "contrasena": contraseña})
-        json_usuarios.guardar_usuarios(usuarios)
+        lista_empleados.guardar_usuarios(usuarios)
 
 def salir():
     root.destroy()
@@ -84,7 +84,7 @@ root.attributes('-fullscreen', True)
 frame_login = tk.Frame(root, padx=5, pady=5)
 frame_login.pack()
 fondos.establecer_imagen_de_fondo(root, "fondofinal.png")
-productos = json_productos.cargar_productos()
+productos = lista_productos.cargar_productos()
 
 login_frame = tk.LabelFrame(root, text="Inicio de Sesión", font=("Times new roman", 12, "bold"), padx=20, pady=20, bg="#FED89B")
 login_frame.pack(padx=20, pady=200)

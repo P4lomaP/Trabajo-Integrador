@@ -4,7 +4,7 @@ import subprocess
 import re
 from tkcalendar import DateEntry
 import fondos
-import json_productos
+import lista_productos
 
 def gestion_productos(productos, nombre_usuario, root):
     def agregar_producto():
@@ -27,7 +27,7 @@ def gestion_productos(productos, nombre_usuario, root):
                             fecha_vencimiento_str = fecha_vencimiento.strftime('%d-%m-%Y')
                             nuevo_producto = {"nombre": nombre, "precio": precio, "stock": stock, "unidad": unidad, "fecha_vencimiento": fecha_vencimiento_str}
                             productos.append(nuevo_producto)
-                            json_productos.guardar_productos(productos)
+                            lista_productos.guardar_productos(productos)
                             messagebox.showinfo("Éxito", "Producto agregado correctamente.")
                             actualizar_lista_productos()
                     else:
@@ -52,7 +52,7 @@ def gestion_productos(productos, nombre_usuario, root):
             confirmacion = messagebox.askyesno("Confirmar eliminación", "¿Estás seguro de que deseas eliminar este producto?")
             if confirmacion:
                 del productos[producto_index]
-                json_productos.guardar_productos(productos)
+                lista_productos.guardar_productos(productos)
                 messagebox.showinfo("Éxito", "Producto eliminado correctamente.")
                 actualizar_lista_productos()
 
@@ -79,7 +79,7 @@ def gestion_productos(productos, nombre_usuario, root):
                             producto_modificar["stock"] = nuevo_stock
                             producto_modificar["unidad"] = nueva_unidad
                             producto_modificar["fecha_vencimiento"] = fecha_vencimiento_str
-                            json_productos.guardar_productos(productos)
+                            lista_productos.guardar_productos(productos)
                             messagebox.showinfo("Éxito", "Producto modificado correctamente.")
                             actualizar_lista_productos()
                         else:
@@ -103,7 +103,7 @@ def gestion_productos(productos, nombre_usuario, root):
         gestion_window.destroy()
         subprocess.Popen(["python","main.py"])
     
-    productos = json_productos.cargar_productos()
+    productos = lista_productos.cargar_productos()
 
     gestion_window = tk.Toplevel(root)
     gestion_window.title("Gestión de Productos")
