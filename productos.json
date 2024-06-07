@@ -65,7 +65,7 @@
     {
         "nombre": "papas",
         "precio": 200.0,
-        "stock": 20,
+        "stock": 18,
         "unidad": "Kilogramos",
         "fecha_vencimiento": "04-06-2024"
     }
