@@ -2,21 +2,71 @@
     {
         "nombre": "pan lactal",
         "precio": 1600.0,
-        "stock": 18
+        "stock": 18,
+        "unidad": "unidad",
+        "fecha_vencimiento": "01-07-2024"
     },
     {
         "nombre": "facturas",
         "precio": 600.0,
-        "stock": 30
+        "stock": 30,
+        "unidad": "docena",
+        "fecha_vencimiento": "30-06-2024"
     },
     {
         "nombre": "coca cola chica",
         "precio": 900.0,
-        "stock": 12
+        "stock": 12,
+        "unidad": "unidad",
+        "fecha_vencimiento": "15-08-2024"
     },
     {
         "nombre": "coca cola mediana",
         "precio": 1300.0,
-        "stock": 10
+        "stock": 10,
+        "unidad": "unidad",
+        "fecha_vencimiento": "15-08-2024"
+    },
+    {
+        "nombre": "leche",
+        "precio": 1200.0,
+        "stock": 20,
+        "unidad": "litro",
+        "fecha_vencimiento": "10-07-2024"
+    },
+    {
+        "nombre": "huevos",
+        "precio": 900.0,
+        "stock": 24,
+        "unidad": "docena",
+        "fecha_vencimiento": "25-06-2024"
+    },
+    {
+        "nombre": "yogurt",
+        "precio": 800.0,
+        "stock": 15,
+        "unidad": "unidad",
+        "fecha_vencimiento": "05-07-2024"
+    },
+    {
+        "nombre": "manzanas",
+        "precio": 2000.0,
+        "stock": 8,
+        "unidad": "kilogramos",
+        "fecha_vencimiento": "28-06-2024"
+    },
+    {
+        "nombre": "azucar",
+        "precio": 1200.0,
+        "stock": 30,
+        "unidad": "kilogramos",
+        "fecha_vencimiento": "21-06-2024"
+    },
+    {
+        "nombre": "papas",
+        "precio": 200.0,
+        "stock": 20,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "04-06-2024"
     }
 ]

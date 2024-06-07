@@ -33,11 +33,12 @@ def gestion_productos(productos, nombre_usuario, root):
                     else:
                         messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios.")
                 else:
-                    messagebox.showerror("Error", "Precio o stock no válidos.")
+                    messagebox.showerror("Error", "Precio o stock no válidos.02")
             except ValueError:
                 messagebox.showerror("Error", "Precio o stock no válidos. Deben ser números positivos.")
         else:
             messagebox.showerror("Error", "Por favor complete todos los campos.")
+
 
     def actualizar_lista_productos():
         for item in treeview_productos.get_children():
@@ -181,13 +182,17 @@ def gestion_productos(productos, nombre_usuario, root):
     entry_fecha_vencimiento = DateEntry(form_frame, font=("Times new roman", 14), cal_bg="yellow", cal_fg="black", background="blue", foreground="white", borderwidth=2, selectbackground="violet", selectforeground="white", showweeknumbers=False, locale='es_ES', date_pattern='dd-mm-yyyy', state='readonly')
     entry_fecha_vencimiento.grid(row=4, column=1, padx=10, pady=5, sticky="w")
 
-    btn_eliminar = tk.Button(gestion_frame, text="Eliminar Producto", command=eliminar_producto,font=("Times new roman", 14),bg="#BE7250", fg="white")  
-    btn_eliminar.grid(row=7, column=0, columnspan=3, pady=10)
-    btn_modificar = tk.Button(gestion_frame, text="Modificar Producto", command=modificar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")  
-    btn_modificar.grid(row=8, column=0, columnspan=3, pady=10)
+    btn_agregar = tk.Button(form_frame, text="Agregar Producto", command=agregar_producto, font=("Times new roman", 14), bg="#8F4B2C", fg="white")
+    btn_agregar.grid(row=5, column=0, columnspan=2, padx=10, pady=10, sticky="w")
 
-    btn_volver = tk.Button(gestion_frame, text="Volver", command=volver, font=("Times new roman", 14), bg="#BE7250", fg="white")  
-    btn_volver.grid(row=9, column=0, columnspan=3, pady=10)
+    btn_eliminar = tk.Button(form_frame, text="Eliminar Producto", command=eliminar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")
+    btn_eliminar.grid(row=6, column=0, columnspan=2, padx=10, pady=10, sticky="w")
+    
+    btn_modificar = tk.Button(form_frame, text="Modificar Producto", command=modificar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")
+    btn_modificar.grid(row=7, column=0, columnspan=2, padx=10, pady=10, sticky="w")
+
+    btn_volver = tk.Button(form_frame, text="Salir", command=volver, font=("Times new roman", 14), fg="white", bg="#BE7250")
+    btn_volver.grid(row=8, column=0, columnspan=2, padx=10, pady=10, sticky="w")
     
     actualizar_lista_productos()
 
