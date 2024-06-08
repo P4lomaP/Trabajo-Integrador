@@ -23,7 +23,7 @@ def iniciar_sesion():
     if nombre_usuario and contraseña:
         categoria = seleccion_categoria.get()
         if categoria:
-            usuarios = lista_empleados.cargar_usuarios()
+            usuarios = lista_empleados.cargar_empleados()
             usuario_encontrado = False
             for usuario in usuarios:
                 if usuario["usuario"] == nombre_usuario:
@@ -61,7 +61,7 @@ def iniciar_sesion():
         messagebox.showerror("Error", "Por favor ingresa tu nombre de usuario y contraseña.")
 
 def verificar_usuario(usuario, categoria, contraseña):
-    usuarios = lista_empleados.cargar_usuarios()
+    usuarios = lista_empleados.cargar_empleados()
     usuario_existente = False
 
     for u in usuarios:
@@ -71,7 +71,7 @@ def verificar_usuario(usuario, categoria, contraseña):
 
     if not usuario_existente:
         usuarios.append({"usuario": usuario, "categoria": categoria, "contrasena": contraseña})
-        lista_empleados.guardar_usuarios(usuarios)
+        lista_empleados.guardar_empleados(usuarios)
 
 def salir():
     root.destroy()
