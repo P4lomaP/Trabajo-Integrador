@@ -3,6 +3,7 @@ from tkinter import messagebox, ttk
 import fondos
 import lista_productos
 import subprocess
+import registro_carrito
 
 def ventas(productos, nombre_usuario, master):
     carrito = []
@@ -26,6 +27,7 @@ def ventas(productos, nombre_usuario, master):
                         messagebox.showinfo("Éxito", f"Se añadieron {cantidad_vendida} unidades de {producto['nombre']} al carrito.")
                         actualizar_lista_productos()
                         actualizar_carrito()
+                        entry_cantidad.delete(0, 'end')
                     else:
                         messagebox.showerror("Error", "La cantidad ingresada no es válida.")
                 except ValueError:
@@ -55,9 +57,10 @@ def ventas(productos, nombre_usuario, master):
     
     def comprar():
         if carrito:
-            total_compra = sum(item['total'] for item in carrito)
-            detalles_compra = "\n".join([f"{item['nombre']} - Cantidad: {item['cantidad_vendida']} - Total: {item['total']}" for item in carrito])
-            messagebox.showinfo("Detalles de la Compra", f"Nombre del Cliente: {nombre_usuario}\n\nDetalles de la Compra:\n{detalles_compra}\n\nTotal de la Compra: {total_compra}")
+            total_venta = sum(item['total'] for item in carrito)
+            detalles_venta = "\n".join([f"{item['nombre']} - Cantidad: {item['cantidad_vendida']} - Total: {item['total']}" for item in carrito])
+            messagebox.showinfo("Detalles de la Venta", f"Venta realizada por: {nombre_usuario}\n\nDetalles de la Venta:\n{detalles_venta}\n\nTotal de la Venta: {total_venta}")
+            registro_carrito.agregar_venta(nombre_usuario, carrito)
             carrito.clear()
             actualizar_carrito()
         else:
