@@ -1,72 +1,359 @@
 [
     {
-        "nombre": "pan lactal",
-        "precio": 1600.0,
-        "stock": 18,
-        "unidad": "unidad",
-        "fecha_vencimiento": "01-07-2024"
-    },
-    {
-        "nombre": "facturas",
-        "precio": 600.0,
-        "stock": 30,
-        "unidad": "docena",
-        "fecha_vencimiento": "30-06-2024"
-    },
-    {
-        "nombre": "coca cola chica",
-        "precio": 900.0,
-        "stock": 12,
-        "unidad": "unidad",
-        "fecha_vencimiento": "15-08-2024"
-    },
-    {
-        "nombre": "coca cola mediana",
-        "precio": 1300.0,
-        "stock": 10,
-        "unidad": "unidad",
-        "fecha_vencimiento": "15-08-2024"
-    },
-    {
-        "nombre": "leche",
-        "precio": 1200.0,
-        "stock": 20,
-        "unidad": "litro",
-        "fecha_vencimiento": "10-07-2024"
-    },
-    {
-        "nombre": "huevos",
-        "precio": 900.0,
-        "stock": 24,
-        "unidad": "docena",
-        "fecha_vencimiento": "25-06-2024"
-    },
-    {
-        "nombre": "yogurt",
+        "nombre": "baguette",
         "precio": 800.0,
-        "stock": 15,
-        "unidad": "unidad",
+        "stock": 10,
+        "unidad": "Gramos",
+        "fecha_vencimiento": "15-06-2024"
+    },
+    {
+        "nombre": "croissant",
+        "precio": 200.0,
+        "stock": 25,
+        "unidad": "Gramos",
+        "fecha_vencimiento": "20-06-2024"
+    },
+    {
+        "nombre": "pan integral",
+        "precio": 1700.0,
+        "stock": 8,
+        "unidad": "Kilogramos",
         "fecha_vencimiento": "05-07-2024"
     },
     {
-        "nombre": "manzanas",
-        "precio": 2000.0,
+        "nombre": "donas",
+        "precio": 150.0,
+        "stock": 30,
+        "unidad": "Unidades",
+        "fecha_vencimiento": "10-06-2024"
+    },
+    {
+        "nombre": "pan de centeno",
+        "precio": 1800.0,
+        "stock": 6,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "08-07-2024"
+    },
+    {
+        "nombre": "pan dulce",
+        "precio": 2200.0,
+        "stock": 4,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "25-12-2024"
+    },
+    {
+        "nombre": "pan frances",
+        "precio": 900.0,
+        "stock": 12,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "30-06-2024"
+    },
+    {
+        "nombre": "pan de maiz",
+        "precio": 1650.0,
+        "stock": 7,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "12-07-2024"
+    },
+    {
+        "nombre": "bagel",
+        "precio": 180.0,
+        "stock": 20,
+        "unidad": "Gramos",
+        "fecha_vencimiento": "15-06-2024"
+    },
+    {
+        "nombre": "pan de avena",
+        "precio": 1750.0,
+        "stock": 9,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "18-07-2024"
+    },
+    {
+        "nombre": "muffins",
+        "precio": 300.0,
+        "stock": 18,
+        "unidad": "Gramos",
+        "fecha_vencimiento": "22-06-2024"
+    },
+    {
+        "nombre": "pan brioche",
+        "precio": 2100.0,
+        "stock": 5,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "30-07-2024"
+    },
+    {
+        "nombre": "pan de espelta",
+        "precio": 1900.0,
+        "stock": 5,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "02-08-2024"
+    },
+    {
+        "nombre": "pastel de chocolate",
+        "precio": 2500.0,
+        "stock": 3,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "14-06-2024"
+    },
+    {
+        "nombre": "pan de cebada",
+        "precio": 1600.0,
+        "stock": 7,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "06-07-2024"
+    },
+    {
+        "nombre": "rollo de canela",
+        "precio": 200.0,
+        "stock": 15,
+        "unidad": "Unidades",
+        "fecha_vencimiento": "11-06-2024"
+    },
+    {
+        "nombre": "pan de nuez",
+        "precio": 1850.0,
         "stock": 8,
-        "unidad": "kilogramos",
-        "fecha_vencimiento": "28-06-2024"
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "20-07-2024"
+    },
+    {
+        "nombre": "galletas de avena",
+        "precio": 250.0,
+        "stock": 40,
+        "unidad": "Paquetes",
+        "fecha_vencimiento": "25-06-2024"
+    },
+    {
+        "nombre": "pan de pasas",
+        "precio": 1700.0,
+        "stock": 6,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "18-07-2024"
+    },
+    {
+        "nombre": "pan de centeno con semillas",
+        "precio": 2000.0,
+        "stock": 5,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "28-07-2024"
+    },
+    {
+        "nombre": "tarta de manzana",
+        "precio": 2400.0,
+        "stock": 3,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "10-06-2024"
+    },
+    {
+        "nombre": "pan de platano",
+        "precio": 1900.0,
+        "stock": 4,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "12-07-2024"
+    },
+    {
+        "nombre": "pan de papa",
+        "precio": 1600.0,
+        "stock": 7,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "05-07-2024"
+    },
+    {
+        "nombre": "galletas de chispas de chocolate",
+        "precio": 280.0,
+        "stock": 30,
+        "unidad": "Paquetes",
+        "fecha_vencimiento": "22-06-2024"
+    },
+    {
+        "nombre": "pan de miel",
+        "precio": 1850.0,
+        "stock": 6,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "10-07-2024"
+    },
+    {
+        "nombre": "pan de trigo",
+        "precio": 1700.0,
+        "stock": 8,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "08-07-2024"
+    },
+    {
+        "nombre": "bizcocho de limon",
+        "precio": 2300.0,
+        "stock": 3,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "14-06-2024"
+    },
+    {
+        "nombre": "pan rustico",
+        "precio": 1500.0,
+        "stock": 10,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "30-06-2024"
+    },
+    {
+        "nombre": "brownies",
+        "precio": 320.0,
+        "stock": 22,
+        "unidad": "Paquetes",
+        "fecha_vencimiento": "15-06-2024"
+    },
+    {
+        "nombre": "jugo de naranja",
+        "precio": 250.0,
+        "stock": 20,
+        "unidad": "Mililitros",
+        "fecha_vencimiento": "20-06-2024"
+    },
+    {
+        "nombre": "leche",
+        "precio": 200.0,
+        "stock": 30,
+        "unidad": "Litros",
+        "fecha_vencimiento": "25-07-2024"
+    },
+    {
+        "nombre": "agua mineral",
+        "precio": 90.0,
+        "stock": 50,
+        "unidad": "Litros",
+        "fecha_vencimiento": "25-07-2024"
+    },
+    {
+        "nombre": "cafe",
+        "precio": 500.0,
+        "stock": 15,
+        "unidad": "Mililitros",
+        "fecha_vencimiento": "15-06-2024"
+    },
+    {
+        "nombre": "te verde",
+        "precio": 300.0,
+        "stock": 25,
+        "unidad": "Mililitros",
+        "fecha_vencimiento": "22-06-2024"
+    },
+    {
+        "nombre": "limonada",
+        "precio": 200.0,
+        "stock": 20,
+        "unidad": "Mililitros",
+        "fecha_vencimiento": "18-06-2024"
+    },
+    {
+        "nombre": "cerveza",
+        "precio": 350.0,
+        "stock": 40,
+        "unidad": "Litros",
+        "fecha_vencimiento": "12-08-2024"
+    },
+    {
+        "nombre": "vino tinto",
+        "precio": 700.0,
+        "stock": 10,
+        "unidad": "Litros",
+        "fecha_vencimiento": "30-12-2024"
+    },
+    {
+        "nombre": "zumo de manzana",
+        "precio": 250.0,
+        "stock": 20,
+        "unidad": "Mililitros",
+        "fecha_vencimiento": "20-06-2024"
+    },
+    {
+        "nombre": "bebida energetica",
+        "precio": 400.0,
+        "stock": 30,
+        "unidad": "Mililitros",
+        "fecha_vencimiento": "10-07-2024"
+    },
+    {
+        "nombre": "batido de chocolate",
+        "precio": 300.0,
+        "stock": 25,
+        "unidad": "Mililitros",
+        "fecha_vencimiento": "25-06-2024"
+    },
+    {
+        "nombre": "harina de trigo",
+        "precio": 600.0,
+        "stock": 50,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "01-12-2024"
     },
     {
         "nombre": "azucar",
-        "precio": 1200.0,
-        "stock": 30,
-        "unidad": "kilogramos",
-        "fecha_vencimiento": "21-06-2024"
+        "precio": 400.0,
+        "stock": 40,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "01-12-2024"
     },
     {
-        "nombre": "papas",
-        "precio": 400.0,
+        "nombre": "levadura",
+        "precio": 150.0,
         "stock": 30,
+        "unidad": "Gramos",
+        "fecha_vencimiento": "01-09-2024"
+    },
+    {
+        "nombre": "mantequilla",
+        "precio": 700.0,
+        "stock": 20,
         "unidad": "Kilogramos",
-        "fecha_vencimiento": "07-06-2024"
+        "fecha_vencimiento": "01-08-2024"
+    },
+    {
+        "nombre": "leche en polvo",
+        "precio": 1200.0,
+        "stock": 25,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "01-10-2024"
+    },
+    {
+        "nombre": "huevos",
+        "precio": 100.0,
+        "stock": 200,
+        "unidad": "Paquetes",
+        "fecha_vencimiento": "10-06-2024"
+    },
+    {
+        "nombre": "sal",
+        "precio": 50.0,
+        "stock": 100,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "01-01-2025"
+    },
+    {
+        "nombre": "aceite vegetal",
+        "precio": 800.0,
+        "stock": 20,
+        "unidad": "Litros",
+        "fecha_vencimiento": "01-12-2024"
+    },
+    {
+        "nombre": "miel",
+        "precio": 1500.0,
+        "stock": 15,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "01-07-2024"
+    },
+    {
+        "nombre": "chocolate",
+        "precio": 2000.0,
+        "stock": 10,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "01-10-2024"
+    },
+    {
+        "nombre": "fruta deshidratada",
+        "precio": 2500.0,
+        "stock": 8,
+        "unidad": "Kilogramos",
+        "fecha_vencimiento": "01-08-2024"
     }
 ]

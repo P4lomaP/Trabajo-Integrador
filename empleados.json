@@ -3,5 +3,20 @@
         "usuario": "Euge",
         "categoria": "Ventas",
         "contrasena": "1234"
+    },
+    {
+        "usuario": "Seba",
+        "categoria": "Ventas",
+        "contrasena": "1234"
+    },
+    {
+        "usuario": "Paloma",
+        "categoria": "Gestion",
+        "contrasena": "1234"
+    },
+    {
+        "usuario": "Lucas",
+        "categoria": "Gestion",
+        "contrasena": "1234"
     }
 ]

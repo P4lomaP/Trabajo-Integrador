@@ -7,6 +7,42 @@ import fondos
 import lista_productos
 
 def gestion_productos(productos, nombre_usuario, root):
+    def modificar_producto():
+        selected_item = treeview_productos.selection()
+        if selected_item:
+            iid = selected_item[0]
+            producto_modificar = productos[int(iid)]
+
+            nuevo_nombre = entry_nombre.get()
+            nuevo_precio = entry_precio.get()
+            nuevo_stock = entry_stock.get()
+            nueva_unidad = entry_unidad.get()
+            nueva_fecha_vencimiento = entry_fecha_vencimiento.get_date().strftime('%d-%m-%Y')
+
+            if nuevo_nombre and nuevo_precio and nuevo_stock and nueva_unidad and nueva_fecha_vencimiento:
+                try:
+                    nuevo_precio = float(nuevo_precio)
+                    nuevo_stock = int(nuevo_stock)
+                    if nuevo_precio > 0 and nuevo_stock >= 0:
+                        if re.match("^[a-zA-Z\s]+$", nuevo_nombre):
+                            producto_modificar["nombre"] = nuevo_nombre
+                            producto_modificar["precio"] = nuevo_precio
+                            producto_modificar["stock"] = nuevo_stock
+                            producto_modificar["unidad"] = nueva_unidad
+                            producto_modificar["fecha_vencimiento"] = nueva_fecha_vencimiento
+
+                            lista_productos.guardar_productos(productos)
+                            messagebox.showinfo("Éxito", "Producto modificado correctamente")
+                            actualizar_producto_en_treeview(iid, producto_modificar)
+                        else:
+                            messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios")
+                    else:
+                        messagebox.showerror("Error", "El precio y el stock deben ser números positivos")
+                except ValueError:
+                    messagebox.showerror("Error", "El precio y el stock deben ser números")
+            else:
+                messagebox.showerror("Error", "Por favor complete todos los campos")
+
     def agregar_producto():
         nombre = entry_nombre.get()
         precio = entry_precio.get()
@@ -14,12 +50,12 @@ def gestion_productos(productos, nombre_usuario, root):
         unidad = entry_unidad.get()
         fecha_vencimiento = entry_fecha_vencimiento.get_date()
 
-        if nombre and precio and stock and unidad and fecha_vencimiento:
+        if nombre and precio and stock and unidad:
             try:
                 precio = float(precio)
                 stock = int(stock)
                 if precio > 0 and stock >= 0:
-                    if re.match("^[a-zA-Z\s]+$", nombre): 
+                    if re.match("^[a-zA-Z\s]+$", nombre):
                         nombres_existente = [producto['nombre'].lower() for producto in productos]
                         if nombre.lower() in nombres_existente:
                             messagebox.showerror("Error", "El nombre del producto ya existe.")
@@ -33,63 +69,34 @@ def gestion_productos(productos, nombre_usuario, root):
                     else:
                         messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios.")
                 else:
-                    messagebox.showerror("Error", "Precio o stock no válidos.02")
+                    messagebox.showerror("Error", "Precio o stock no válidos.")
             except ValueError:
                 messagebox.showerror("Error", "Precio o stock no válidos. Deben ser números positivos.")
         else:
             messagebox.showerror("Error", "Por favor complete todos los campos.")
-
+    
     def actualizar_lista_productos():
+        filtro = search_var.get().lower()
         for item in treeview_productos.get_children():
             treeview_productos.delete(item)
         for i, producto in enumerate(productos):
-            treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
+            if filtro in producto['nombre'].lower():
+                treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
     
     def eliminar_producto():
         selected_item = treeview_productos.selection()
         if selected_item:
-            producto_index = treeview_productos.index(selected_item[0])
+            iid = selected_item[0]
+            producto_id = treeview_productos.item(iid)['values'][0]
             confirmacion = messagebox.askyesno("Confirmar eliminación", "¿Estás seguro de que deseas eliminar este producto?")
             if confirmacion:
-                del productos[producto_index]
+                del productos[int(iid)]
                 lista_productos.guardar_productos(productos)
                 messagebox.showinfo("Éxito", "Producto eliminado correctamente.")
                 actualizar_lista_productos()
-
-    def modificar_producto():
-        selected_item = treeview_productos.selection()
-        if selected_item:
-            producto_index = treeview_productos.index(selected_item[0])
-            producto_modificar = productos[producto_index]
-            nuevo_nombre = entry_nombre.get()
-            nuevo_precio = entry_precio.get()
-            nuevo_stock = entry_stock.get()
-            nueva_unidad = entry_unidad.get()
-            nueva_fecha_vencimiento = entry_fecha_vencimiento.get_date()
-
-            if nuevo_nombre and nuevo_precio and nuevo_stock and nueva_unidad and nueva_fecha_vencimiento:
-                try:
-                    nuevo_precio = float(nuevo_precio)
-                    nuevo_stock = int(nuevo_stock)
-                    if nuevo_precio > 0 and nuevo_stock > 0:
-                        if re.match("^[a-zA-Z\s]+$", nuevo_nombre):
-                            fecha_vencimiento_str = nueva_fecha_vencimiento.strftime('%d-%m-%Y')
-                            producto_modificar["nombre"] = nuevo_nombre
-                            producto_modificar["precio"] = nuevo_precio
-                            producto_modificar["stock"] = nuevo_stock
-                            producto_modificar["unidad"] = nueva_unidad
-                            producto_modificar["fecha_vencimiento"] = fecha_vencimiento_str
-                            lista_productos.guardar_productos(productos)
-                            messagebox.showinfo("Éxito", "Producto modificado correctamente.")
-                            actualizar_lista_productos()
-                        else:
-                            messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios.")
-                    else:
-                        messagebox.showerror("Error", "El precio y la cantidad deben ser números positivos.")
-                except ValueError:
-                    messagebox.showerror("Error", "El precio y la cantidad deben ser números.")
-            else:
-                messagebox.showerror("Error", "Por favor completa todos los campos.")
+    
+    def actualizar_producto_en_treeview(iid, producto_modificar):
+        treeview_productos.item(iid, values=(producto_modificar['nombre'], producto_modificar['precio'], producto_modificar['stock'], producto_modificar['unidad'], producto_modificar['fecha_vencimiento']))            
     
     def filtrar_productos(event):
         filtro = search_var.get().lower()
@@ -152,6 +159,9 @@ def gestion_productos(productos, nombre_usuario, root):
     treeview_productos.heading("unidad", text="Unidad")
     treeview_productos.heading("fecha_vencimiento", text="Fecha de Vencimiento")
     treeview_productos.pack(fill=tk.BOTH, expand=True)
+
+    vsb.config(command=treeview_productos.yview)
+    hsb.config(command=treeview_productos.xview)
     
     form_frame = tk.Frame(gestion_frame, padx=20, pady=6, bg="#FED89B")
     form_frame.grid(row=2, column=0, columnspan=6, padx=10, pady=(10, 5), sticky="nsew")
@@ -195,7 +205,7 @@ def gestion_productos(productos, nombre_usuario, root):
     btn_modificar = tk.Button(form_frame, text="Modificar Producto", command=modificar_producto, font=("Times new roman", 14), bg="#BE7250", fg="white")
     btn_modificar.grid(row=7, column=0, columnspan=2, padx=10, pady=10, sticky="w")
 
-    btn_volver = tk.Button(form_frame, text="Salir", command=volver, font=("Times new roman", 14), fg="white", bg="#BE7250")
+    btn_volver = tk.Button(form_frame, text="Volver", command=volver, font=("Times new roman", 14), fg="white", bg="#BE7250")
     btn_volver.grid(row=8, column=0, columnspan=2, padx=10, pady=10, sticky="w")
     
     actualizar_lista_productos()

@@ -1,0 +1,56 @@
+[
+    {
+        "id": "e0960b72-44fc-4a8e-a1ab-29872f7fb767",
+        "vendedor": "Euge",
+        "detalles": [
+            {
+                "nombre": "azucar",
+                "cantidad_vendida": 2,
+                "total": 2400.0
+            },
+            {
+                "nombre": "huevos",
+                "cantidad_vendida": 1,
+                "total": 900.0
+            }
+        ],
+        "total_venta": 3300.0,
+        "fecha": "08-06-2024"
+    },
+    {
+        "id": "645757b3-772a-4957-aafa-1cacc04b785f",
+        "vendedor": "Euge",
+        "detalles": [
+            {
+                "nombre": "papas",
+                "cantidad_vendida": 2,
+                "total": 800.0
+            },
+            {
+                "nombre": "facturas",
+                "cantidad_vendida": 1,
+                "total": 600.0
+            }
+        ],
+        "total_venta": 1400.0,
+        "fecha": "08-06-2024"
+    },
+    {
+        "id": "daf874ad-5a05-4ab7-a3ea-4997cb037132",
+        "vendedor": "Seba",
+        "detalles": [
+            {
+                "nombre": "pan brioche",
+                "cantidad_vendida": 1,
+                "total": 2100.0
+            },
+            {
+                "nombre": "galletas de chispas de chocolate",
+                "cantidad_vendida": 5,
+                "total": 1400.0
+            }
+        ],
+        "total_venta": 3500.0,
+        "fecha": "08-06-2024"
+    }
+]

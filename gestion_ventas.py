@@ -7,11 +7,13 @@ import registro_carrito
 
 def ventas(productos, nombre_usuario, master):
     carrito = []
+    producto_indices = {}
 
     def vender_producto():
         selected_item = treeview_productos.selection()
         if selected_item:
-            producto_index = treeview_productos.index(selected_item[0])
+            iid = selected_item[0]
+            producto_index = producto_indices[iid]
             producto = productos[producto_index]
             cantidad_vendida = entry_cantidad.get()
             if cantidad_vendida:
@@ -40,8 +42,16 @@ def ventas(productos, nombre_usuario, master):
     def actualizar_lista_productos():
         treeview_productos.delete(*treeview_productos.get_children())
         for i, producto in enumerate(productos):
-            treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
+           iid = treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
+           producto_indices[iid] = i
 
+    def actualizar_carrito():
+        listbox_carrito.delete(0, 'end')
+        for producto in carrito:
+            listbox_carrito.insert('end', f"{producto['nombre']} - Cantidad: {producto['cantidad_vendida']} - Total: {producto['total']}")
+    
+    
+    
     def actualizar_carrito():
         listbox_carrito.delete(0, 'end')
         for producto in carrito:
@@ -49,11 +59,13 @@ def ventas(productos, nombre_usuario, master):
     
     def filtrar_productos(event):
         filtro = search_var.get().lower()
+        producto_indices.clear()
         for item in treeview_productos.get_children():
             treeview_productos.delete(item)
         for i, producto in enumerate(productos):
             if filtro in producto['nombre'].lower():
-                treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
+                iid = treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
+                producto_indices[iid] = i        
     
     def comprar():
         if carrito:
