@@ -49,14 +49,6 @@ def ventas(productos, nombre_usuario, master):
         listbox_carrito.delete(0, 'end')
         for producto in carrito:
             listbox_carrito.insert('end', f"{producto['nombre']} - Cantidad: {producto['cantidad_vendida']} - Total: {producto['total']}")
-    
-    
-    
-    def actualizar_carrito():
-        listbox_carrito.delete(0, 'end')
-        for producto in carrito:
-            listbox_carrito.insert('end', f"{producto['nombre']} - Cantidad: {producto['cantidad_vendida']} - Total: {producto['total']}")
-    
     def filtrar_productos(event):
         filtro = search_var.get().lower()
         producto_indices.clear()
@@ -105,7 +97,7 @@ def ventas(productos, nombre_usuario, master):
         ventas_window.destroy()
         subprocess.Popen(["python","main.py"])
 
-    ventas_frame = tk.Frame(ventas_window, padx=20, pady=6, bg="#FED89B")
+    ventas_frame = tk.Frame(ventas_window, padx=20, pady=6, bg="#FFCD98")
     ventas_frame.pack(expand=True, fill=tk.BOTH)
 
     ventas_frame.grid_rowconfigure(0, weight=0)
@@ -114,10 +106,10 @@ def ventas(productos, nombre_usuario, master):
     ventas_frame.grid_columnconfigure(0, weight=1)
     ventas_frame.grid_columnconfigure(1, weight=1)
 
-    label_productos = tk.Label(ventas_frame, text="Productos Disponibles:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_productos = tk.Label(ventas_frame, text="Productos Disponibles:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_productos.grid(row=0, column=0, columnspan=3, sticky="w", padx=10, pady=(10, 5))
 
-    search_label = tk.Label(ventas_frame, text="Buscar Producto:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    search_label = tk.Label(ventas_frame, text="Buscar Producto:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     search_label.grid(row=0, column=3, sticky="w", padx=(10, 0), pady=(10, 5))
 
     search_var = tk.StringVar()
@@ -125,7 +117,7 @@ def ventas(productos, nombre_usuario, master):
     search_bar.grid(row=0, column=4, columnspan=2, padx=(0, 10), pady=(10, 5), sticky="ew")
     search_bar.bind("<KeyRelease>", filtrar_productos)
 
-    treeview_frame = tk.Frame(ventas_frame, bg="#FED89B")
+    treeview_frame = tk.Frame(ventas_frame, bg="#FFCD98")
     treeview_frame.grid(row=1, column=0, columnspan=2, padx=10, pady=(0, 5), sticky="nsew")
 
     style = ttk.Style()
@@ -148,10 +140,10 @@ def ventas(productos, nombre_usuario, master):
     treeview_productos.heading("fecha_vencimiento", text="Fecha de Vencimiento")
     treeview_productos.pack(fill=tk.BOTH, expand=True)
 
-    carrito_frame = tk.Frame(ventas_frame, padx=20, pady=6, bg="#FED89B")
+    carrito_frame = tk.Frame(ventas_frame, padx=20, pady=6, bg="#FFCD98")
     carrito_frame.grid(row=1, column=2, columnspan=4, rowspan=2, padx=10, pady=(0, 5), sticky="nsew")
 
-    label_cartel = tk.Label(carrito_frame, text="Carrito de Compras:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_cartel = tk.Label(carrito_frame, text="Carrito de Compras:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_cartel.pack(side="top", fill="both", expand=True)
 
     listbox_carrito = tk.Listbox(carrito_frame, font=("Times new roman", 14), width=40, height=10)
@@ -166,21 +158,7 @@ def ventas(productos, nombre_usuario, master):
     entry_frame = tk.Frame(ventas_frame, bg="#FED89B")
     entry_frame.grid(row=3, column=0, columnspan=6, padx=10, pady=10, sticky="nsew")
 
-    label_cantidad = tk.Label(entry_frame, text="Cantidad:", font=("Times new roman", 14, "bold"), bg="#FED89B")
-    label_cantidad.grid(row=0, column=0, sticky="w", padx=10, pady=5)
-    entry_cantidad = tk.Entry(entry_frame, font=("Times new roman", 14))
-    entry_cantidad.grid(row=0, column=1, padx=10, pady=5, sticky="w")
-
-    btn_vender = tk.Button(entry_frame, text="Añadir al Carrito", command=vender_producto, font=("Times new roman", 14), bg="#8F4B2C", fg="white")
-    btn_vender.grid(row=0, column=2, padx=10, pady=10, sticky="w")
-
-    btn_salir = tk.Button(entry_frame, text="Salir", command=volver, font=("Times new roman", 14), fg="white", bg="#BE7250")
-    btn_salir.grid(row=0, column=4, padx=10, pady=10, sticky="e")
-
-    entry_frame = tk.Frame(ventas_frame, bg="#FED89B")
-    entry_frame.grid(row=3, column=0, columnspan=6, padx=10, pady=10, sticky="nsew")
-
-    label_cantidad = tk.Label(entry_frame, text="Cantidad:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_cantidad = tk.Label(entry_frame, text="Cantidad:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_cantidad.grid(row=0, column=0, sticky="w", padx=10, pady=5)
     entry_cantidad = tk.Entry(entry_frame, font=("Times new roman", 14))
     entry_cantidad.grid(row=0, column=1, padx=10, pady=5, sticky="w")

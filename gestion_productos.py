@@ -9,39 +9,42 @@ import lista_productos
 def gestion_productos(productos, nombre_usuario, root):
     def modificar_producto():
         selected_item = treeview_productos.selection()
-        if selected_item:
-            iid = selected_item[0]
-            producto_modificar = productos[int(iid)]
+        if not selected_item:
+            messagebox.showerror("Error", "Por favor, seleccione un producto para modificar.")
+            return
+        
+        iid = selected_item[0]
+        producto_modificar = productos[int(iid)]
 
-            nuevo_nombre = entry_nombre.get()
-            nuevo_precio = entry_precio.get()
-            nuevo_stock = entry_stock.get()
-            nueva_unidad = entry_unidad.get()
-            nueva_fecha_vencimiento = entry_fecha_vencimiento.get_date().strftime('%d-%m-%Y')
+        nuevo_nombre = entry_nombre.get()
+        nuevo_precio = entry_precio.get()
+        nuevo_stock = entry_stock.get()
+        nueva_unidad = entry_unidad.get()
+        nueva_fecha_vencimiento = entry_fecha_vencimiento.get_date().strftime('%d-%m-%Y')
 
-            if nuevo_nombre and nuevo_precio and nuevo_stock and nueva_unidad and nueva_fecha_vencimiento:
-                try:
-                    nuevo_precio = float(nuevo_precio)
-                    nuevo_stock = int(nuevo_stock)
-                    if nuevo_precio > 0 and nuevo_stock >= 0:
-                        if re.match("^[a-zA-Z\s]+$", nuevo_nombre):
-                            producto_modificar["nombre"] = nuevo_nombre
-                            producto_modificar["precio"] = nuevo_precio
-                            producto_modificar["stock"] = nuevo_stock
-                            producto_modificar["unidad"] = nueva_unidad
-                            producto_modificar["fecha_vencimiento"] = nueva_fecha_vencimiento
+        if nuevo_nombre and nuevo_precio and nuevo_stock and nueva_unidad and nueva_fecha_vencimiento:
+            try:
+                nuevo_precio = float(nuevo_precio)
+                nuevo_stock = int(nuevo_stock)
+                if nuevo_precio > 0 and nuevo_stock >= 0:
+                    if re.match("^[a-zA-Z\s]+$", nuevo_nombre):
+                        producto_modificar["nombre"] = nuevo_nombre
+                        producto_modificar["precio"] = nuevo_precio
+                        producto_modificar["stock"] = nuevo_stock
+                        producto_modificar["unidad"] = nueva_unidad
+                        producto_modificar["fecha_vencimiento"] = nueva_fecha_vencimiento
 
-                            lista_productos.guardar_productos(productos)
-                            messagebox.showinfo("Éxito", "Producto modificado correctamente")
-                            actualizar_producto_en_treeview(iid, producto_modificar)
-                        else:
-                            messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios")
+                        lista_productos.guardar_productos(productos)
+                        messagebox.showinfo("Éxito", "Producto modificado correctamente")
+                        actualizar_producto_en_treeview(iid, producto_modificar)
                     else:
-                        messagebox.showerror("Error", "El precio y el stock deben ser números positivos")
-                except ValueError:
-                    messagebox.showerror("Error", "El precio y el stock deben ser números")
-            else:
-                messagebox.showerror("Error", "Por favor complete todos los campos")
+                        messagebox.showerror("Error", "El nombre del producto solo puede contener letras y espacios")
+                else:
+                    messagebox.showerror("Error", "El precio y el stock deben ser números positivos")
+            except ValueError:
+                messagebox.showerror("Error", "El precio y el stock deben ser números")
+        else:
+            messagebox.showerror("Error", "Por favor complete todos los campos")
 
     def agregar_producto():
         nombre = entry_nombre.get()
@@ -85,6 +88,11 @@ def gestion_productos(productos, nombre_usuario, root):
     
     def eliminar_producto():
         selected_item = treeview_productos.selection()
+        if not selected_item:
+            messagebox.showerror("Error", "Por favor, seleccione un producto para modificar.")
+            return
+        
+        selected_item = treeview_productos.selection()
         if selected_item:
             iid = selected_item[0]
             producto_id = treeview_productos.item(iid)['values'][0]
@@ -120,7 +128,7 @@ def gestion_productos(productos, nombre_usuario, root):
     fondo_path = "fondoge.png"
     fondos.establecer_imagen_de_fondo(gestion_window, fondo_path)
 
-    gestion_frame = tk.Frame(gestion_window, padx=20, pady=6, bg="#FED89B")
+    gestion_frame = tk.Frame(gestion_window, padx=20, pady=6, bg="#FFCD98")
     gestion_frame.pack(expand=True, fill=tk.BOTH)
 
     gestion_frame.grid_rowconfigure(0, weight=0)
@@ -129,10 +137,10 @@ def gestion_productos(productos, nombre_usuario, root):
     gestion_frame.grid_columnconfigure(0, weight=1)
     gestion_frame.grid_columnconfigure(1, weight=1)
 
-    label_productos = tk.Label(gestion_frame, text="Gestión de Productos:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_productos = tk.Label(gestion_frame, text="Gestión de Productos:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_productos.grid(row=0, column=0, columnspan=3, sticky="w", padx=10, pady=(10, 5))
 
-    search_label = tk.Label(gestion_frame, text="Buscar Producto:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    search_label = tk.Label(gestion_frame, text="Buscar Producto:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     search_label.grid(row=0, column=3, sticky="e", padx=(0, 10), pady=(10, 5))
 
     search_var = tk.StringVar()
@@ -140,7 +148,7 @@ def gestion_productos(productos, nombre_usuario, root):
     search_bar.grid(row=0, column=4, columnspan=2, padx=10, pady=(10, 5), sticky="ew")
     search_bar.bind("<KeyRelease>", filtrar_productos)
 
-    treeview_frame = tk.Frame(gestion_frame, bg="#FED89B")
+    treeview_frame = tk.Frame(gestion_frame, bg="#FFCD98")
     treeview_frame.grid(row=1, column=0, columnspan=6, padx=10, pady=(0, 5), sticky="nsew")
 
     style = ttk.Style()
@@ -163,25 +171,25 @@ def gestion_productos(productos, nombre_usuario, root):
     vsb.config(command=treeview_productos.yview)
     hsb.config(command=treeview_productos.xview)
     
-    form_frame = tk.Frame(gestion_frame, padx=20, pady=6, bg="#FED89B")
+    form_frame = tk.Frame(gestion_frame, padx=20, pady=6, bg="#FFCD98")
     form_frame.grid(row=2, column=0, columnspan=6, padx=10, pady=(10, 5), sticky="nsew")
 
-    label_nombre = tk.Label(form_frame, text="Nombre:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_nombre = tk.Label(form_frame, text="Nombre:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_nombre.grid(row=0, column=0, sticky="w", padx=10, pady=5)
     entry_nombre = tk.Entry(form_frame, font=("Times new roman", 14))
     entry_nombre.grid(row=0, column=1, padx=10, pady=5, sticky="w")
 
-    label_precio = tk.Label(form_frame, text="Precio:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_precio = tk.Label(form_frame, text="Precio:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_precio.grid(row=1, column=0, sticky="w", padx=10, pady=5)
     entry_precio = tk.Entry(form_frame, font=("Times new roman", 14))
     entry_precio.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
-    label_stock = tk.Label(form_frame, text="Stock:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_stock = tk.Label(form_frame, text="Stock:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_stock.grid(row=2, column=0, sticky="w", padx=10, pady=5)
     entry_stock = tk.Entry(form_frame, font=("Times new roman", 14))
     entry_stock.grid(row=2, column=1, padx=10, pady=5, sticky="w")
 
-    label_unidad = tk.Label(form_frame, text="Unidad:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_unidad = tk.Label(form_frame, text="Unidad:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_unidad.grid(row=3, column=0, sticky="w", padx=10, pady=5)
 
     unidades = ["Kilogramos", "Gramos", "Litros", "Mililitros", "Paquetes", "Otro"]
@@ -190,7 +198,7 @@ def gestion_productos(productos, nombre_usuario, root):
     entry_unidad.grid(row=3, column=1, padx=10, pady=5, sticky="w")
     entry_unidad.current(0)
 
-    label_fecha_vencimiento = tk.Label(form_frame, text="Fecha de Vencimiento:", font=("Times new roman", 14, "bold"), bg="#FED89B")
+    label_fecha_vencimiento = tk.Label(form_frame, text="Fecha de Vencimiento:", font=("Times new roman", 14, "bold"), bg="#FFCD98")
     label_fecha_vencimiento.grid(row=4, column=0, sticky="w", padx=10, pady=5)
 
     entry_fecha_vencimiento = DateEntry(form_frame, font=("Times new roman", 14), cal_bg="yellow", cal_fg="black", background="blue", foreground="white", borderwidth=2, selectbackground="violet", selectforeground="white", showweeknumbers=False, locale='es_ES', date_pattern='dd-mm-yyyy', state='readonly')

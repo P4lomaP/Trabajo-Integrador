@@ -86,32 +86,32 @@ frame_login.pack()
 fondos.establecer_imagen_de_fondo(root, "fondofinal.png")
 productos = lista_productos.cargar_productos()
 
-login_frame = tk.LabelFrame(root, text="Inicio de Sesión", font=("Times new roman", 12, "bold"), padx=20, pady=20, bg="#FED89B")
+login_frame = tk.LabelFrame(root, text="Inicio de Sesión", font=("Times new roman", 12, "bold"), padx=20, pady=20, bg="#FFCD98")
 login_frame.pack(padx=20, pady=200)
 
-label_usuario = tk.Label(login_frame, text="Nombre de Usuario:", font=("Times new roman", 14), bg="#FED89B")
+label_usuario = tk.Label(login_frame, text="Nombre de Usuario:", font=("Times new roman", 14), bg="#FFCD98")
 label_usuario.grid(row=0, column=0, sticky="e")
 entry_usuario = tk.Entry(login_frame, font=("Times new roman", 14))
 entry_usuario.grid(row=0, column=1, padx=10, pady=5)
 
-label_password = tk.Label(login_frame, text="Contraseña:", font=("Times new roman", 14), bg="#FED89B")
+label_password = tk.Label(login_frame, text="Contraseña:", font=("Times new roman", 14), bg="#FFCD98")
 label_password.grid(row=1, column=0, sticky="e")
 entry_password = tk.Entry(login_frame, show="*", font=("Times new roman", 14))
 entry_password.grid(row=1, column=1, padx=10, pady=5)
 
-label_info = tk.Label(login_frame, text="Por favor elija una categoría para continuar:", font=("Times new roman", 14), bg="#FED89B")
+label_info = tk.Label(login_frame, text="Por favor elija una categoría para continuar:", font=("Times new roman", 14), bg="#FFCD98")
 label_info.grid(row=2, column=0, columnspan=2, pady=5)
 
 seleccion_categoria = tk.StringVar()
 
-radiobutton_gestion = tk.Radiobutton(login_frame, text="Gestión de Productos", variable=seleccion_categoria, value="Gestion", font=("Times new roman", 14), bg="#FED89B")
+radiobutton_gestion = tk.Radiobutton(login_frame, text="Gestión de Productos", variable=seleccion_categoria, value="Gestion", font=("Times new roman", 14), bg="#FFCD98")
 radiobutton_gestion.grid(row=3, column=0, columnspan=2, padx=10, pady=5)
 
-radiobutton_ventas = tk.Radiobutton(login_frame, text="Ventas", variable=seleccion_categoria, value="Ventas", font=("Times new roman", 14), bg="#FED89B")
+radiobutton_ventas = tk.Radiobutton(login_frame, text="Ventas", variable=seleccion_categoria, value="Ventas", font=("Times new roman", 14), bg="#FFCD98")
 radiobutton_ventas.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
 
 guardar_usuario_var = tk.BooleanVar()
-check_guardar_usuario = tk.Checkbutton(login_frame, text="Guardar Usuario", variable=guardar_usuario_var, font=("Times new roman", 14), bg="#FED89B")
+check_guardar_usuario = tk.Checkbutton(login_frame, text="Guardar Usuario", variable=guardar_usuario_var, font=("Times new roman", 14), bg="#FFCD98")
 check_guardar_usuario.grid(row=5, column=0, columnspan=2, pady=5)
 
 btn_continuar = tk.Button(login_frame, text="Continuar", command=iniciar_sesion, font=("Times new roman", 14), fg="white", bg="#BE7250")
