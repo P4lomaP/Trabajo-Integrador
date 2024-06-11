@@ -160,7 +160,7 @@ def gestion_productos(productos, nombre_usuario, root):
     hsb = ttk.Scrollbar(treeview_frame, orient="horizontal")
     hsb.pack(side='bottom', fill='x')
 
-    treeview_productos = ttk.Treeview(treeview_frame, columns=("nombre", "precio", "stock", "unidad", "fecha_vencimiento"), show="headings", height=10)
+    treeview_productos = ttk.Treeview(treeview_frame, columns=("nombre", "precio", "stock", "unidad", "fecha_vencimiento"), show="headings", height=10, yscrollcommand=vsb.set, xscrollcommand=hsb.set)
     treeview_productos.heading("nombre", text="Nombre")
     treeview_productos.heading("precio", text="Precio")
     treeview_productos.heading("stock", text="Stock")
