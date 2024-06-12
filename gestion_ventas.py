@@ -49,6 +49,7 @@ def gestion_ventas(productos, nombre_usuario, master):
         listbox_carrito.delete(0, 'end')
         for producto in carrito:
             listbox_carrito.insert('end', f"{producto['nombre']} - Cantidad: {producto['cantidad_vendida']} - Total: {producto['total']}")
+    
     def filtrar_productos(event):
         filtro = search_var.get().lower()
         producto_indices.clear()
