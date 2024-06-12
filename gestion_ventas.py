@@ -60,7 +60,7 @@ def gestion_ventas(productos, nombre_usuario, master):
                 iid = treeview_productos.insert('', 'end', iid=i, values=(producto['nombre'], producto['precio'], producto['stock'], producto['unidad'], producto['fecha_vencimiento']))
                 producto_indices[iid] = i        
     
-    def comprar():
+    def vender():
         if carrito:
             total_venta = sum(item['total'] for item in carrito)
             detalles_venta = "\n".join([f"{item['nombre']} - Cantidad: {item['cantidad_vendida']} - Total: {item['total']}" for item in carrito])
@@ -150,7 +150,7 @@ def gestion_ventas(productos, nombre_usuario, master):
     listbox_carrito = tk.Listbox(carrito_frame, font=("Times new roman", 14), width=40, height=10)
     listbox_carrito.pack(fill="both", expand=True)
 
-    btn_comprar = tk.Button(carrito_frame, text="Comprar", command=comprar, font=("Times new roman", 14), fg="white", bg="#8F4B2C")
+    btn_comprar = tk.Button(carrito_frame, text="Comprar", command=vender, font=("Times new roman", 14), fg="white", bg="#8F4B2C")
     btn_comprar.pack(side="bottom", padx=10, pady=(0, 10))
 
     btn_eliminar = tk.Button(carrito_frame, text="Eliminar del Carrito", command=eliminar_del_carrito, font=("Times new roman", 14), bg="#8F4B2C", fg="white")
