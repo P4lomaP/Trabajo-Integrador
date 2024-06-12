@@ -5,7 +5,7 @@ import lista_productos
 import subprocess
 import registro_carrito
 
-def ventas(productos, nombre_usuario, master):
+def gestion_ventas(productos, nombre_usuario, master):
     carrito = []
     producto_indices = {}
 
@@ -155,7 +155,7 @@ def ventas(productos, nombre_usuario, master):
     btn_eliminar = tk.Button(carrito_frame, text="Eliminar del Carrito", command=eliminar_del_carrito, font=("Times new roman", 14), bg="#8F4B2C", fg="white")
     btn_eliminar.pack(side="bottom", padx=10, pady=(5, 0))
 
-    entry_frame = tk.Frame(ventas_frame, bg="#FED89B")
+    entry_frame = tk.Frame(ventas_frame, bg="#FFCD98")
     entry_frame.grid(row=3, column=0, columnspan=6, padx=10, pady=10, sticky="nsew")
 
     label_cantidad = tk.Label(entry_frame, text="Cantidad:", font=("Times new roman", 14, "bold"), bg="#FFCD98")

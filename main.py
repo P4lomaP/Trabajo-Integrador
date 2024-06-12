@@ -35,7 +35,7 @@ def iniciar_sesion():
                         root.withdraw()
                         if categoria == "Ventas":
                             productos = lista_productos.cargar_productos()
-                            gestion_ventas.ventas(productos, nombre_usuario, root)
+                            gestion_ventas.gestion_ventas(productos, nombre_usuario, root)
                         else:
                             productos = lista_productos.cargar_productos()
                             gestion_productos.gestion_productos(productos, nombre_usuario, root)
@@ -46,7 +46,7 @@ def iniciar_sesion():
                 root.withdraw()
                 if categoria == "Ventas":
                     productos = lista_productos.cargar_productos()
-                    gestion_ventas.ventas(productos, nombre_usuario, root)
+                    gestion_ventas.gestion_ventas(productos, nombre_usuario, root)
                 else:
                     productos = lista_productos.cargar_productos()
                     gestion_productos.gestion_productos(productos, nombre_usuario, root)
