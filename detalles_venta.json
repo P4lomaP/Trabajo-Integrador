@@ -52,5 +52,18 @@
         ],
         "total_venta": 3500.0,
         "fecha": "08-06-2024"
+    },
+    {
+        "id": "c2a2cb32-8458-4d40-a69d-ac2438d22fd3",
+        "vendedor": "Seba",
+        "detalles": [
+            {
+                "nombre": "limonada",
+                "cantidad_vendida": 2,
+                "total": 400.0
+            }
+        ],
+        "total_venta": 400.0,
+        "fecha": "11-06-2024"
     }
 ]

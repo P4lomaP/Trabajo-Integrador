@@ -88,6 +88,8 @@ def gestion_ventas(productos, nombre_usuario, master):
         else:
             messagebox.showerror("Error", "Por favor selecciona un producto del carrito para eliminar.")
 
+    productos = lista_productos.cargar_productos()
+
     ventas_window = tk.Toplevel(master)
     ventas_window.title("Ventas")
     ventas_window.state('normal')

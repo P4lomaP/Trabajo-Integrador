@@ -240,7 +240,7 @@
     {
         "nombre": "limonada",
         "precio": 200.0,
-        "stock": 20,
+        "stock": 18,
         "unidad": "Mililitros",
         "fecha_vencimiento": "18-06-2024"
     },
