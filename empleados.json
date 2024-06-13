@@ -18,5 +18,10 @@
         "usuario": "Lucas",
         "categoria": "Gestion",
         "contrasena": "1234"
+    },
+    {
+        "usuario": "Carla",
+        "categoria": "Gestion",
+        "contrasena": "1234"
     }
 ]
